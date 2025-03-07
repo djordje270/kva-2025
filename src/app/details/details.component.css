@@ -1,0 +1,19 @@
+.movie-card {
+    min-width: 49%;
+    margin-bottom: 30px;
+}
+
+.movie-content {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.movie-content img {
+    max-width: 620px;
+}
+
+

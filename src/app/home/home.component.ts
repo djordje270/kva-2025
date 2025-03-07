@@ -7,24 +7,31 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { UtilsService } from '../../services/utils.service';
 import { LoadingComponent } from "../loading/loading.component";
+import { RouterLink } from '@angular/router';
+import { MovieModel } from '../../models/movie.model';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-home',
-  imports: [NgIf, NgFor, MatButtonModule, MatCardModule, LoadingComponent],
+  imports: [NgIf, NgFor, MatButtonModule, MatCardModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  public flights: FlightModel[] | null = null
-  public error: string | null = null
+  // Uzimamo sve filmove sa servisa
+  dataSource: MovieModel[] = this.getRandomMovies();
 
-  constructor(public utils: UtilsService) {
-    FlightService.getFlights(0, 3)
-      .then(rsp => this.flights = rsp.data.content)
-      .catch((e: AxiosError) => this.error = `${e.code}: ${e.message}`)
-  }
+  // Funkcija koja vraća 3 nasumično izabrana filma
+  private getRandomMovies(): MovieModel[] {
+    const allMovies: MovieModel[] = MovieService.getMovies(); // Pretpostavljam da uzimaš sve filmove sa servisa
 
-  public generateDestinationImage(dest: string) {
-    return `https://img.pequla.com/destination/${dest.split(' ')[0].toLowerCase()}.jpg`
+    // Mešanje niza koristeći Fisher-Yates algoritam
+    for (let i = allMovies.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [allMovies[i], allMovies[j]] = [allMovies[j], allMovies[i]]; // Swap elemenata
+    }
+
+    // Vraćamo prva 3 filma iz izmešanog niza
+    return allMovies.slice(0, 3);
   }
 }
