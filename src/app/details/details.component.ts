@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FlightModel } from '../../models/flight.model';
 import { FlightService } from '../../services/flight.service';
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { UtilsService } from '../../services/utils.service';
 import { LoadingComponent } from "../loading/loading.component";
 import { MatCardModule } from '@angular/material/card';
@@ -14,7 +14,7 @@ import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-details',
-  imports: [NgIf, MatCardModule, MatListModule, MatButtonModule, RouterLink],
+  imports: [NgIf, NgFor, MatCardModule, MatListModule, MatButtonModule, RouterLink],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })

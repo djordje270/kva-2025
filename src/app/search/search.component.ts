@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { FlightModel } from '../../models/flight.model';
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FlightService } from '../../services/flight.service';
 import { MatButtonModule } from '@angular/material/button';
 import { UtilsService } from '../../services/utils.service';
@@ -12,7 +12,7 @@ import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-search',
-  imports: [MatTableModule, NgIf, MatButtonModule, RouterLink],
+  imports: [MatTableModule, NgIf, NgFor, MatButtonModule, RouterLink],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })

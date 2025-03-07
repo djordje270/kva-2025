@@ -4,7 +4,11 @@
         <mat-card-content>
             <h1>{{element.title}}</h1>
             <p>Duration: {{element.duration}}</p>
-            <p>Genre: {{element.genre}}</p>
+            <p>Genre: 
+                <span *ngFor="let genre of element.genre; let i = index">
+                    {{ genre.name }}<span *ngIf="i < element.genre.length - 1">, </span>
+                </span>
+            </p>
             <p>Showtime: {{element.showtime}}</p>
         </mat-card-content>
         <mat-card-actions>
