@@ -28,6 +28,6 @@ export class SearchComponent {
         [allMovies[i], allMovies[j]] = [allMovies[j], allMovies[i]];
       }
   
-      return allMovies.slice(0, 8);
+      return allMovies.slice(0, 10);
     }
 }

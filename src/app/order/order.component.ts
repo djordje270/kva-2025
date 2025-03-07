@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FlightModel } from '../../models/flight.model';
 import { FlightService } from '../../services/flight.service';
 import { UtilsService } from '../../services/utils.service';
@@ -16,10 +16,11 @@ import { MovieModel } from '../../models/movie.model';
 import { MovieService } from '../../services/movie.service';
 import { CinemaModel } from '../../models/cinema.model';
 import { CinemaService } from '../../services/cinema.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-order',
-  imports: [MatCardModule, NgIf, NgFor, MatInputModule, MatButtonModule, MatSelectModule, MatFormFieldModule],
+  imports: [MatCardModule, NgIf, NgFor, MatInputModule, MatButtonModule, MatSelectModule, MatFormFieldModule, FormsModule],
   templateUrl: './order.component.html',
   styleUrl: './order.component.css'
 })
@@ -30,7 +31,7 @@ export class OrderComponent {
   public selectedTicketCount: number = 1
   public selectedPrice: number = 10
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     // Uzimamo ID filma iz URL-a
@@ -42,6 +43,7 @@ export class OrderComponent {
 
   public doOrder() {
     const result = UserService.createOrder({
+      orderId: new Date().getTime(),
       id: this.movie!.id,
       title: this.movie!.title,
       duration: this.movie!.duration,
@@ -52,5 +54,7 @@ export class OrderComponent {
       status: 'ordered',
       rating: null
     })
+
+    result ? this.router.navigate(['/user']) : alert('An error occured while creating an order')
   }
 }

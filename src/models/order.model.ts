@@ -1,6 +1,7 @@
 import { CinemaModel } from "./cinema.model"
 
 export interface OrderModel {
+    orderId: number
     id: number
     title: string
     duration: string
