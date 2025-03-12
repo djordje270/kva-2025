@@ -1,26 +1,55 @@
 <div class="wrapper" *ngIf="movie">
-    <h1>{{movie.title}}</h1>
     <div class="movie-content">
         <img [src]="movie.picture" [alt]="movie.title">
         <mat-card class="movie-card" appearance="outlined">
             <mat-card-content>
-                <h3>Movie Details</h3>
                 <mat-list role="list">
-                    <mat-list-item>Description: {{movie.description}}</mat-list-item>
-                    <mat-list-item>Genre:
-                        <span *ngFor="let genre of movie.genre; let i = index">
-                            {{ genre.name }}<span *ngIf="i < movie.genre.length - 1">, </span>
+                    <mat-list-item>
+                        <h2>Movie Details</h2>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <span matListItemTitle>Title:</span>
+                        <span matListItemLine>{{movie.title}}</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <span matListItemTitle>Description:</span>
+                        <span matListItemLine>{{movie.description}}</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <span matListItemTitle>Genre:</span>
+                        <span matListItemLine>
+                            <span *ngFor="let genre of movie.genre; let i = index">
+                                {{ genre.name }}<span *ngIf="i < movie.genre.length - 1">,</span>
+                            </span>
                         </span>
                     </mat-list-item>
-                    <mat-list-item>Duration: {{movie.duration}}</mat-list-item>
-                    <mat-list-item>Director: {{movie.director}}</mat-list-item>
-                    <mat-list-item>Actors:
-                        <span *ngFor="let actor of movie.actors; let i = index">
-                            {{ actor.name }}<span *ngIf="i < movie.actors.length - 1">, </span>
+                    <mat-list-item>
+                        <span matListItemTitle>Duration:</span>
+                        <span matListItemLine>{{movie.duration}}</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <span matListItemTitle>Director:</span>
+                        <span matListItemLine>{{movie.director}}</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <span matListItemTitle>Actors:</span>
+                        <span matListItemLine>
+                            <span *ngFor="let actor of movie.actors; let i = index">
+                                {{ actor.name }}<span *ngIf="i < movie.genre.length - 1">,</span>
+                            </span>
                         </span>
                     </mat-list-item>
-                    <mat-list-item>Release date: {{movie.releaseDate}}</mat-list-item>
-                    <mat-list-item>Showtime: {{movie.showtime}}</mat-list-item>
+                    <mat-list-item>
+                        <span matListItemTitle>Release date:</span>
+                        <span matListItemLine>{{movie.releaseDate}}</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <span matListItemTitle>Showtime:</span>
+                        <span matListItemLine>{{movie.showtime}}</span></mat-list-item>
+                    <mat-list-item>
+                        <span matListItemTitle>Price:</span>
+                        <span matListItemLine>{{movie.price}}&#8364;</span>
+                    </mat-list-item>
                 </mat-list>
             </mat-card-content>
             <mat-card-actions>

@@ -7,8 +7,8 @@ export interface OrderModel {
     duration: string
     showtime: string
     cinema: CinemaModel
+    price: number
     count: number
-    pricePerItem: number
     status: 'ordered' | 'paid' | 'canceled'
     rating: null | boolean
 }

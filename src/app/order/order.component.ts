@@ -29,7 +29,6 @@ export class OrderComponent {
   public cinemas: CinemaModel[] = CinemaService.getCinemas()
   public selectedCinema: CinemaModel = this.cinemas[0]
   public selectedTicketCount: number = 1
-  public selectedPrice: number = 10
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
@@ -49,8 +48,8 @@ export class OrderComponent {
       duration: this.movie!.duration,
       showtime: this.movie!.showtime,
       cinema: this.selectedCinema,
+      price: this.movie!.price,
       count: this.selectedTicketCount,
-      pricePerItem: this.selectedPrice,
       status: 'ordered',
       rating: null
     })

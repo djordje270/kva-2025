@@ -9,6 +9,7 @@ export interface MovieModel {
   releaseDate: string;
   showtime: string;
   picture: string;
+  price: number;
 }
 
 export interface GenreModel {

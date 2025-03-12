@@ -7,17 +7,35 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { UserModel } from '../../models/user.model';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
-  imports: [NgIf, MatButtonModule, MatCardModule, MatTableModule, RouterLink],
+  imports: [
+    NgIf,
+    MatButtonModule,
+    MatCardModule,
+    MatTableModule,
+    RouterLink,
+    MatExpansionModule,
+    MatAccordion,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent {
 
-  public displayedColumns: string[] = ['title', 'duration', 'showtime', 'cinema', 'count', 'price', 'total', 'status', 'rating', 'actions'];
+  public displayedColumns: string[] = ['title', 'duration', 'showtime', 'cinema', 'count', 'price', 'total', 'status', 'actions'];
   public user: UserModel | null = null
+
+  public oldPasswordValue = ''
+  public newPasswordValue = ''
+  public repeatPasswordValue = ''
 
   constructor(private router: Router) {
     if (!UserService.getActiveUser()) {
@@ -31,14 +49,32 @@ export class UserComponent {
   }
 
   public doChangePassword() {
-    const newPassword = prompt('Enter your new password')
-    if (newPassword == '' || newPassword == null) {
-      alert('Password cant be empty')
+    if (this.oldPasswordValue == '' || this.newPasswordValue == null) {
+      alert("Password can't be empty")
       return
     }
-    
-    alert(UserService.changePassword(newPassword) ? 'Password has been changed' : 'Failed to change password')
+
+    if (this.newPasswordValue !== this.repeatPasswordValue) {
+      alert("Password don't match")
+      return
+    }
+
+    if (this.oldPasswordValue !== this.user?.password) {
+      alert("Password don't match")
+      return
+    }
+
+    alert(
+      UserService.changePassword(this.newPasswordValue) ?
+        'Password has been changed' : 'Failed to change password'
+    )
+
+    this.oldPasswordValue = ''
+    this.newPasswordValue = ''
+    this.repeatPasswordValue = ''
   }
+
+  
 
   public doPay(order: OrderModel) {
     if (UserService.changeOrderStatus('paid', order.orderId)) {

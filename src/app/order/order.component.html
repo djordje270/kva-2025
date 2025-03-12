@@ -18,12 +18,8 @@
                 </mat-select>
             </mat-form-field>
             <mat-form-field class="full-width">
-                <mat-label>Choose price</mat-label>
-                <mat-select [(ngModel)]="selectedPrice">
-                    <mat-option [value]="10">First level - 10&euro;</mat-option>
-                    <mat-option [value]="20">Second level - 20&euro;</mat-option>
-                    <mat-option [value]="30">Third level - 30&euro;</mat-option>
-                </mat-select>
+                <mat-label>Price: </mat-label>
+                <input type="text" matInput [value]="movie.price" disabled>
             </mat-form-field>
             <mat-form-field class="full-width">
                 <mat-label>Ticket Count</mat-label>
