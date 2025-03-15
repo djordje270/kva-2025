@@ -2,11 +2,11 @@
     <h1>Search</h1>
     <mat-card class="search-card">
         <mat-card-content>
-            <mat-form-field class="search-input">
+            <mat-form-field class="full-width">
                 <mat-label>Movie Name</mat-label>
                 <input type="text" matInput placeholder="Enter movie name" [(ngModel)]="inputTitle" (keyup)="doSearch()">
             </mat-form-field>
-            <mat-form-field class="search-input">
+            <mat-form-field class="full-width">
                 <mat-label>Select Genre</mat-label>
                 <mat-select (selectionChange)="doSelectGenre()" [(ngModel)]="selectedGenre">
                     <mat-option *ngFor="let genre of genreList" [value]="genre">
@@ -14,7 +14,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field class="search-input">
+            <mat-form-field class="full-width">
                 <mat-label>Price</mat-label>
                 <input type="number" matInput placeholder="Enter price" [(ngModel)]="inputPrice" (keyup)="doSearch()">
             </mat-form-field>
@@ -26,7 +26,7 @@
         </mat-card-actions>
     </mat-card>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        
+
         <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef>
                 <i class="fa-solid fa-tag"></i> Title

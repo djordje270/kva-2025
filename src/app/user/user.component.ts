@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router, RouterLink } from '@angular/router';
 import { OrderModel } from '../../models/order.model';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -11,10 +11,13 @@ import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-user',
   imports: [
+    CommonModule,
     NgIf,
     MatButtonModule,
     MatCardModule,
@@ -24,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     MatAccordion,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule],
+    FormsModule,
+    MatSelectModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
@@ -32,7 +36,9 @@ export class UserComponent {
 
   public displayedColumns: string[] = ['title', 'duration', 'showtime', 'cinema', 'count', 'price', 'total', 'status', 'actions'];
   public user: UserModel | null = null
-
+  public userCopy: UserModel | null = null
+  public genreList: any[] = []
+  
   public oldPasswordValue = ''
   public newPasswordValue = ''
   public repeatPasswordValue = ''
@@ -46,6 +52,9 @@ export class UserComponent {
     }
 
     this.user = UserService.getActiveUser()
+    this.userCopy = UserService.getActiveUser()
+    const genres = MovieService.getGenres()
+    this.genreList = genres.map(genre => genre.name)
   }
 
   public doChangePassword() {
@@ -74,7 +83,16 @@ export class UserComponent {
     this.repeatPasswordValue = ''
   }
 
-  
+  public doUpdateUser() {
+    if (this.userCopy == null) {
+      alert('User not defined')
+      return
+    }
+
+    UserService.updateUser(this.userCopy)
+    this.user = UserService.getActiveUser()
+    alert('User was updated')
+  }
 
   public doPay(order: OrderModel) {
     if (UserService.changeOrderStatus('paid', order.orderId)) {

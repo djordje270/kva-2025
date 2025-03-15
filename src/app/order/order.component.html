@@ -12,14 +12,14 @@
                 <input type="text" matInput [value]="movie.showtime" disabled>
             </mat-form-field>
             <mat-form-field class="full-width">
+                <mat-label>Price: </mat-label>
+                <input type="text" matInput [value]="movie.price" disabled>
+            </mat-form-field>
+            <mat-form-field class="full-width">
                 <mat-label>Cinema: </mat-label>
                 <mat-select [(ngModel)]="selectedCinema">
                     <mat-option *ngFor="let cinema of cinemas" [value]="cinema">{{cinema.name}}</mat-option>
                 </mat-select>
-            </mat-form-field>
-            <mat-form-field class="full-width">
-                <mat-label>Price: </mat-label>
-                <input type="text" matInput [value]="movie.price" disabled>
             </mat-form-field>
             <mat-form-field class="full-width">
                 <mat-label>Ticket Count</mat-label>

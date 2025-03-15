@@ -240,7 +240,7 @@ export class MovieService {
         releaseDate: '2022-12-16',
         showtime: '2025-03-23 19:10:00',
         picture: '/avatar.jpg',
-        price: 26
+        price: 25
       },
       {
         id: 12,
@@ -262,7 +262,7 @@ export class MovieService {
         releaseDate: '2022-03-04',
         showtime: '2025-03-23 19:20:00',
         picture: '/batman.jpg',
-        price: 23
+        price: 22
       },
       {
         id: 13,
@@ -284,7 +284,7 @@ export class MovieService {
         releaseDate: '2021-12-17',
         showtime: '2025-03-23 19:30:00',
         picture: '/spider-man.jpg',
-        price: 27
+        price: 24
       },
       {
         id: 14,
@@ -458,5 +458,4 @@ export class MovieService {
         { id: 7, name: 'Fantasy' }
       ];
     }    
-
   }

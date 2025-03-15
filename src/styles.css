@@ -5,6 +5,11 @@ body {
     color: white;
 }
 
+.bg-dark {
+    background-color: #1e2124;
+    color: white;
+}
+
 a {
     color: gray;
 }
@@ -18,6 +23,7 @@ body {
     margin-top: 30px;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 10px;
 }
 

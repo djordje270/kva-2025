@@ -17,6 +17,7 @@ import { MovieService } from '../../services/movie.service';
 import { CinemaModel } from '../../models/cinema.model';
 import { CinemaService } from '../../services/cinema.service';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order',
@@ -41,19 +42,38 @@ export class OrderComponent {
   }
 
   public doOrder() {
-    const result = UserService.createOrder({
-      orderId: new Date().getTime(),
-      id: this.movie!.id,
-      title: this.movie!.title,
-      duration: this.movie!.duration,
-      showtime: this.movie!.showtime,
-      cinema: this.selectedCinema,
-      price: this.movie!.price,
-      count: this.selectedTicketCount,
-      status: 'ordered',
-      rating: null
+    Swal.fire({
+      title: `Place an order to ${this.movie?.title}?`,
+      text: "Orders can be canceled any time from your user profile!",
+      icon: "warning",
+      showCancelButton: true,
+      customClass: {
+        popup: 'bg-dark'
+      },
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, place an order!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const result = UserService.createOrder({
+          orderId: new Date().getTime(),
+          id: this.movie!.id,
+          title: this.movie!.title,
+          duration: this.movie!.duration,
+          showtime: this.movie!.showtime,
+          cinema: this.selectedCinema,
+          price: this.movie!.price,
+          count: this.selectedTicketCount,
+          status: 'ordered',
+          rating: null
+        })
+        result ? this.router.navigate(['/user']) :
+          Swal.fire({
+            title: "Failed to create an order",
+            text: "Something is wrong with your order!",
+            icon: "error"
+          });
+      }
     })
-
-    result ? this.router.navigate(['/user']) : alert('An error occured while creating an order')
   }
 }

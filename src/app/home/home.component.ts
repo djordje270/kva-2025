@@ -32,6 +32,6 @@ export class HomeComponent {
     }
 
     // Vraćamo prva 3 filma iz izmešanog niza
-    return allMovies.slice(0, 3);
+    return allMovies.slice(0, 8);
   }
 }

@@ -1,5 +1,6 @@
 import { OrderModel } from "../models/order.model"
 import { UserModel } from "../models/user.model"
+import { MovieModel } from "../models/movie.model"
 
 export class UserService {
 
@@ -46,6 +47,21 @@ export class UserService {
         users.push(model)
         localStorage.setItem('users', JSON.stringify(users))
         return true
+    }
+
+    static updateUser(model: UserModel) {
+        const users = this.retrieveUsers()
+        for (let u of users) {
+            if (u.email === model.email) {
+                u.firstName = model.firstName
+                u.lastName = model.lastName
+                u.address = model.address
+                u.phone = model.phone
+                u.favouriteGenre = model.favouriteGenre
+            }
+        }
+
+        localStorage.setItem('users', JSON.stringify(users))
     }
 
     static getActiveUser(): UserModel | null {
