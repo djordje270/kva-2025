@@ -9,6 +9,6 @@ export interface OrderModel {
     cinema: CinemaModel
     price: number
     count: number
-    status: 'ordered' | 'paid' | 'canceled'
+    status: 'ordered' | 'paid' | 'cancelled'
     rating: null | boolean
 }

@@ -101,7 +101,7 @@ export class UserComponent {
   }
 
   public doCancel(order: OrderModel) {
-    if (UserService.changeOrderStatus('canceled', order.orderId)) {
+    if (UserService.changeOrderStatus('cancelled', order.orderId)) {
       this.user = UserService.getActiveUser()
     }
   }

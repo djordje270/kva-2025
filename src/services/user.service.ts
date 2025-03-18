@@ -1,6 +1,5 @@
 import { OrderModel } from "../models/order.model"
 import { UserModel } from "../models/user.model"
-import { MovieModel } from "../models/movie.model"
 
 export class UserService {
 
@@ -90,7 +89,7 @@ export class UserService {
         return false
     }
 
-    static changeOrderStatus(state: 'ordered' | 'paid' | 'canceled', id: number) {
+    static changeOrderStatus(state: 'ordered' | 'paid' | 'cancelled', id: number) {
         const active = this.getActiveUser()
         if (active) {
             const arr = this.retrieveUsers()
@@ -107,6 +106,7 @@ export class UserService {
             }
         }
         return false
+
     }
 
     static changeRating(r: boolean, id: number) {

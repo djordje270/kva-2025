@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FlightModel } from '../../models/flight.model';
-import { FlightService } from '../../services/flight.service';
-import { UtilsService } from '../../services/utils.service';
 import { MatCardModule } from '@angular/material/card';
 import { NgFor, NgIf } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { AirlineModel } from '../../models/airline.model';
-import { AirlineService } from '../../services/airline.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { UserService } from '../../services/user.service';
 import { MovieModel } from '../../models/movie.model';
@@ -34,10 +29,8 @@ export class OrderComponent {
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    // Uzimamo ID filma iz URL-a
     const movieId = Number(this.route.snapshot.paramMap.get('id'));
 
-    // Filtriramo film prema ID-u
     this.movie = MovieService.getMovies().find(m => m.id === movieId);
   }
 

@@ -160,7 +160,7 @@
                         <div *ngIf="element.status == 'paid' && element.rating == false">
                             DISLIKED
                         </div>
-                        <div *ngIf="element.status == 'ordered' || element.status == 'canceled'">
+                        <div *ngIf="element.status == 'ordered' || element.status == 'cancelled'">
                             {{element.status.toUpperCase()}}
                         </div>
                     </td>

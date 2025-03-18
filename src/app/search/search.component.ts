@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { FlightModel } from '../../models/flight.model';
 import { NgFor, NgIf } from '@angular/common';
-import { FlightService } from '../../services/flight.service';
 import { MatButtonModule } from '@angular/material/button';
-import { UtilsService } from '../../services/utils.service';
-import { LoadingComponent } from "../loading/loading.component";
 import { RouterLink } from '@angular/router';
 import { MovieModel } from '../../models/movie.model';
 import { MovieService } from '../../services/movie.service';
@@ -39,53 +35,45 @@ export class SearchComponent {
   selectedGenre: string | null = null;
   dataSource: MovieModel[] = [];
   inputTitle: string = ''
-  inputPrice: number | null = null; // za filtriranje po ceni
+  inputPrice: number | null = null; 
 
   public constructor() {
     this.allData = this.getAllMovies();
-    this.dataSource = this.allData;  // inicijalno prikazivanje svih filmova
+    this.dataSource = this.allData; 
 
-    // Popuni listu žanrova
     this.genreList = this.allData.map(movie => movie.genre)
       .flat()
-      .map(genre => genre.name)  // uzmi samo ime žanra
-      .filter((value, index, self) => self.indexOf(value) === index);  // Ukloni duplikate
+      .map(genre => genre.name) 
+      .filter((value, index, self) => self.indexOf(value) === index);  
   }
 
-  // Metoda koja vraća sve filmove (hardkodovani podaci)
   private getAllMovies(): MovieModel[] {
-    return MovieService.getMovieList();  // pretpostavljam da si već implementirao MovieService.getMovieList()
+    return MovieService.getMovieList(); 
   }
 
-  // Pretraga filmova prema inputu
   public doSearch() {
     if (this.allData == null) return;
 
     this.dataSource = this.allData.filter(movie => {
-      // Filtriraj po imenu, ceni i žanru
       const matchesTitle = movie.title.toLowerCase().includes(this.inputTitle.toLowerCase());
       const matchesGenre = this.selectedGenre ? movie.genre.some(genre => genre.name === this.selectedGenre) : true;
-      const matchesPrice = this.inputPrice !== null ? movie.price === this.inputPrice : true;  // Proveri da li cena odgovara
+      const matchesPrice = this.inputPrice !== null ? movie.price === this.inputPrice : true; 
 
       return matchesTitle && matchesPrice && matchesGenre;
     });
   }
 
-  // Filtriranje filmova prema odabranom žanru
-  // Filtriranje filmova prema odabranom žanru
   public doSelectGenre() {
-    this.doSearch();  // Pozovi doSearch da bi svi filteri bili povezani
+    this.doSearch(); 
   }
 
-  // Funkcija za resetovanje svih filtera
   public doReset() {
     this.inputTitle = '';
     this.selectedGenre = null;
     this.inputPrice = null;
     
-    // Ako su podaci učitani, resetuj dataSource na sve filmove
     if (this.allData !== null) {
-      this.dataSource = this.allData;  // Resetuje prikaz svih filmova
+      this.dataSource = this.allData; 
     }
   }
 
